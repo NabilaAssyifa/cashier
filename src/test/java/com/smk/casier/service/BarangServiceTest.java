@@ -1,20 +1,29 @@
 package com.smk.casier.service;
 
 import com.smk.casier.model.Barang;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BarangServiceTest {
 
     @Test
     @Order(2)
     void getBarangList() {
-        List<Barang> barangList=BarangService.getInstance().getBarangList();
-        assertEquals(barangList.size(),2);
+        List<Barang> barangList = BarangService.getInstance().getBarangList();
+        assertEquals(barangList.size(),3);
+    }
+
+    @Test
+    @Order(3)
+    void findByName(){
+        List<Barang> resultList = BarangService.getInstance().findByName("Laptop");
+        assertEquals(resultList.size(),2);
     }
 
     @Test
@@ -31,5 +40,14 @@ class BarangServiceTest {
         mouse.setNamaBarang("Mouse");
         mouse.setHargaBarang(100000);
         BarangService.getInstance().addBarang(mouse);
+
+        Barang laptopgaming = new Barang();
+        laptopgaming.setKodeBarang("LP002");
+        laptopgaming.setNamaBarang("Laptop Gaming");
+        laptopgaming.setHargaBarang(2000000);
+        BarangService.getInstance().addBarang(laptopgaming);
+
+
+
     }
 }

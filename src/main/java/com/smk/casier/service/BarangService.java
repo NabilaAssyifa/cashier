@@ -43,11 +43,16 @@ public class BarangService {
         }
     }
     private void writeFile(){
+        try {
+            barangServiceWriter = new FileWriter("barang.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         BufferedWriter bufferedWriter = new BufferedWriter(barangServiceWriter);
         for (int i = 0; i < barangList.size(); i++) {
             Barang barang = barangList.get(i);
             StringBuilder sb = new  StringBuilder();
-            sb.append(barang.getHargaBarang());
+            sb.append(barang.getKodeBarang());
             sb.append("|");
             sb.append(barang.getNamaBarang());
             sb.append("|");
@@ -93,5 +98,15 @@ public class BarangService {
         barangList.add(barang);
         writeFile();
     }
+
+    public List<Barang>
+    findByName(String name){
+        List<Barang>
+                resultList = barangList.stream()
+                .filter( barang -> barang.getNamaBarang().startsWith(name))
+                .toList();
+        return resultList;
+    }
+
 
 }
