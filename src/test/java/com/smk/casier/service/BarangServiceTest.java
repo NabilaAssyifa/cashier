@@ -1,14 +1,14 @@
 package com.smk.casier.service;
-
 import com.smk.casier.dao.BarangDao;
 import com.smk.casier.model.Barang;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(
@@ -37,12 +37,46 @@ class BarangServiceTest {
         barangDao.save(laptop);
 
         Barang mouse = new Barang();
-        mouse.setKodeBarang("M0001");
+        mouse.setKodeBarang("MO001");
         mouse.setNamaBarang("Mouse");
         mouse.setHargaBarang(100000);
         mouse.setDateCreated(new Date());
         mouse.setLastModified(new Date());
         barangDao.save(mouse);
+
+        Barang LaptopGaming = new Barang();
+        mouse.setKodeBarang("LP002");
+        mouse.setNamaBarang("Laptop" + " Gaming");
+        mouse.setHargaBarang(1000000);
+        mouse.setDateCreated(new Date());
+        mouse.setLastModified(new Date());
+        barangDao.save(LaptopGaming);
+
+    }
+
+    @Test
+    @Order(5)
+    void getDataById(){
+        BarangDao barangDao = new BarangDao();
+        Optional<Barang> barang1 = barangDao.get(1);
+        barang1.ifPresent(new Consumer<Barang>() {
+            @Override
+            public void accept(Barang barang) {
+                assertEquals("Laptop", barang.getNamaBarang());
+                assertEquals("LPOO1", barang.getKodeBarang());
+
+            }
+        });
+
+        Optional<Barang> barang2 = barangDao.get(2);
+        barang2.ifPresent(new Consumer<Barang>() {
+            @Override
+            public void accept(Barang barang) {
+                assertEquals("Mouse", barang.getNamaBarang());
+                assertEquals("MO001", barang.getKodeBarang());
+
+            }
+        });
     }
 
     @Test
@@ -59,5 +93,13 @@ class BarangServiceTest {
         mouse.setNamaBarang("Mouse");
         mouse.setHargaBarang(100000);
         BarangService.getInstance().addBarang(mouse);
+
+        Barang laptopGaming = new Barang();
+        laptopGaming.setKodeBarang("LP002");
+        laptopGaming.setNamaBarang("Laptop " + "Gaming");
+        laptopGaming.setHargaBarang(20000000);
+        BarangService.getInstance().addBarang(laptopGaming);
+
+
     }
 }

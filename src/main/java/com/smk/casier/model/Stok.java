@@ -1,9 +1,13 @@
 package com.smk.casier.model;
 
-public class Stok extends Model{
+public class Stok extends Model {
     private int id;
     private String kodeBarang;
-    private int stokBarang;
+    private String namaBarang;
+    private int stokId;
+    private char stokBarang;
+
+    private int jumlahStok;
 
     public int getId() {
         return id;
@@ -21,11 +25,32 @@ public class Stok extends Model{
         this.kodeBarang = kodeBarang;
     }
 
-    public int getStokBarang() {
-        return stokBarang;
+    public void setStokId(String i) {
+        this.id = id;
+
     }
 
-    public void setStokBarang(int stokBarang) {
-        this.stokBarang = stokBarang;
+    public void setNamaBarang(String namaBarang) {
+        this.namaBarang = namaBarang;
+
     }
+
+    public void setJumlahStok(int jumlahStok) {
+        this.jumlahStok = jumlahStok;
+    }
+
+    public int getStokId() {
+        return stokId;
+    }
+
+
+    public String getNamaBarang() {
+        return  namaBarang;
+    }
+
+
+    public int getJumlahStok() {
+        return jumlahStok;
+    }
+
 }
