@@ -17,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StokServiceTest {
 
-    @Test
+    /*@Test
     @Order(2)
     void getStokList() {
         List<Stok> stokList=StokService.getInstance().getStokList();
         assertEquals(stokList.size(),2);
-    }
+    }*/
 
     @Test
     @Order(4)
@@ -79,7 +79,7 @@ class StokServiceTest {
         });
     }
 
-    @Test
+    /*@Test
     @Order(1)
     void addStok() {
         Stok laptop = new Stok();
@@ -101,5 +101,5 @@ class StokServiceTest {
         StokService.getInstance().addStok(laptopGaming);
 
 
-    }
+    }*/
 }

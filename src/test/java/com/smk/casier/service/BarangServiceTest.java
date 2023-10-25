@@ -17,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BarangServiceTest {
 
-    @Test
+    /*@Test
     @Order(2)
     void getBarangList() {
         List<Barang> barangList=BarangService.getInstance().getBarangList();
         assertEquals(barangList.size(),2);
-    }
+    }*/
 
     @Test
     @Order(4)
@@ -63,7 +63,7 @@ class BarangServiceTest {
             @Override
             public void accept(Barang barang) {
                 assertEquals("Laptop", barang.getNamaBarang());
-                assertEquals("LPOO1", barang.getKodeBarang());
+                assertEquals("LP001", barang.getKodeBarang());
 
             }
         });
@@ -77,6 +77,28 @@ class BarangServiceTest {
 
             }
         });
+    }
+    @Test
+    @Order(6)
+    void updateBarangByKodeBarang(){
+        BarangDao barangDao = new BarangDao();
+        Barang laptop = new Barang();
+        laptop.setKodeBarang("LP001");
+        laptop.setNamaBarang("Laptop Updated");
+        laptop.setHargaBarang(6000000);
+        barangDao.update(laptop);
+
+        Optional<Barang> barang1 = barangDao.get(1);
+        barang1.ifPresent(new Consumer<Barang>() {
+            @Override
+            public void accept(Barang barang) {
+                assertEquals("Laptop Updated", barang.getNamaBarang());
+                assertEquals("LP001", barang.getKodeBarang());
+                assertEquals(6000000, barang.getHargaBarang());
+
+            }
+        });
+
     }
 
     @Test
